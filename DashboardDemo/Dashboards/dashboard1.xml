@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dashboard>
+  <Title Text="New Dashboard" />
+  <DataSources>
+    <SqlDataSource ComponentName="DataSource1">
+      <Name>residents</Name>
+      <Connection Name="localhost_dev_Connection" FromAppConfig="true" />
+      <Query Type="SelectQuery" Name="residents">
+        <Tables>
+          <Table Name="residents" />
+        </Tables>
+        <Columns>
+          <Column Table="residents" Name="State" />
+          <Column Table="residents" Name="ResidentID" Aggregate="Count" Alias="ResidentID_Count" />
+        </Columns>
+        <Grouping>
+          <Column Table="residents" Name="State" />
+        </Grouping>
+      </Query>
+      <ConnectionOptions CloseConnection="true" />
+    </SqlDataSource>
+  </DataSources>
+  <Items>
+    <Chart ComponentName="chartDashboardItem1" Name="Chart 1" DataSource="DataSource1" DataMember="residents">
+      <DataItems>
+        <Dimension DataMember="State" DefaultId="DataItem0" />
+        <Measure DataMember="ResidentID_Count" DefaultId="DataItem1" />
+      </DataItems>
+      <SeriesDimensions>
+        <SeriesDimension DefaultId="DataItem0" />
+      </SeriesDimensions>
+      <Panes>
+        <Pane Name="Pane 1">
+          <Series>
+            <Simple>
+              <Value DefaultId="DataItem1" />
+            </Simple>
+          </Series>
+        </Pane>
+      </Panes>
+    </Chart>
+  </Items>
+  <LayoutTree>
+    <LayoutGroup Weight="100">
+      <LayoutItem DashboardItem="chartDashboardItem1" Weight="100" />
+    </LayoutGroup>
+  </LayoutTree>
+</Dashboard>
